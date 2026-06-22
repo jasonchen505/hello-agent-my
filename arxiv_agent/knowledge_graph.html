@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97C2FC", "font": {"color": "white"}, "id": "Dataset Distillation", "label": "Dataset Distillation", "shape": "dot", "title": "Dataset Distillation"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Linear Probes", "label": "Linear Probes", "shape": "dot", "title": "Linear Probes"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Linear Gradient Matching", "label": "Linear Gradient Matching", "shape": "dot", "title": "Linear Gradient Matching"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Synthetic Images", "label": "Synthetic Images", "shape": "dot", "title": "Synthetic Images"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Synthetic Data", "label": "Synthetic Data", "shape": "dot", "title": "Synthetic Data"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Real-Image Baselines", "label": "Real-Image Baselines", "shape": "dot", "title": "Real-Image Baselines"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Pre-Trained Vision Models", "label": "Pre-Trained Vision Models", "shape": "dot", "title": "Pre-Trained Vision Models"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Distilled Datasets", "label": "Distilled Datasets", "shape": "dot", "title": "Distilled Datasets"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Fine-Grained Classification", "label": "Fine-Grained Classification", "shape": "dot", "title": "Fine-Grained Classification"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "EvoLMM", "label": "EvoLMM", "shape": "dot", "title": "EvoLMM"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "LMM reasoning capabilities", "label": "LMM reasoning capabilities", "shape": "dot", "title": "LMM reasoning capabilities"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Proposer and Solver", "label": "Proposer and Solver", "shape": "dot", "title": "Proposer and Solver"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Proposer", "label": "Proposer", "shape": "dot", "title": "Proposer"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "image-grounded questions", "label": "image-grounded questions", "shape": "dot", "title": "image-grounded questions"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "continuous self-rewarding process", "label": "continuous self-rewarding process", "shape": "dot", "title": "continuous self-rewarding process"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "multimodal math-reasoning benchmarks", "label": "multimodal math-reasoning benchmarks", "shape": "dot", "title": "multimodal math-reasoning benchmarks"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "TwiG", "label": "TwiG", "shape": "dot", "title": "TwiG"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Textual Reasoning", "label": "Textual Reasoning", "shape": "dot", "title": "Textual Reasoning"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "Visual Generation", "label": "Visual Generation", "shape": "dot", "title": "Visual Generation"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "context-aware visual outputs", "label": "context-aware visual outputs", "shape": "dot", "title": "context-aware visual outputs"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "SFT", "label": "SFT", "shape": "dot", "title": "SFT"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "TwiG-50K dataset", "label": "TwiG-50K dataset", "shape": "dot", "title": "TwiG-50K dataset"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "RL", "label": "RL", "shape": "dot", "title": "RL"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "TwiG-GRPO strategy", "label": "TwiG-GRPO strategy", "shape": "dot", "title": "TwiG-GRPO strategy"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Existing VLMs", "label": "Existing VLMs", "shape": "dot", "title": "Existing VLMs"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "excessive computational costs", "label": "excessive computational costs", "shape": "dot", "title": "excessive computational costs"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "DualMindVLM", "label": "DualMindVLM", "shape": "dot", "title": "DualMindVLM"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "a simple RL approach", "label": "a simple RL approach", "shape": "dot", "title": "a simple RL approach"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "fast and slow thinking modes", "label": "fast and slow thinking modes", "shape": "dot", "title": "fast and slow thinking modes"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "high token efficiency", "label": "high token efficiency", "shape": "dot", "title": "high token efficiency"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "VNEP", "label": "VNEP", "shape": "dot", "title": "VNEP"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "NEP", "label": "NEP", "shape": "dot", "title": "NEP"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "VANS", "label": "VANS", "shape": "dot", "title": "VANS"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Joint-GRPO", "label": "Joint-GRPO", "shape": "dot", "title": "Joint-GRPO"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "VLM and VDM", "label": "VLM and VDM", "shape": "dot", "title": "VLM and VDM"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "VANS-Data-100K", "label": "VANS-Data-100K", "shape": "dot", "title": "VANS-Data-100K"}, {"color": "#FFFF00", "font": {"color": "white"}, "id": "state-of-the-art performance", "label": "state-of-the-art performance", "shape": "dot", "title": "state-of-the-art performance"}]);
+                  edges = new vis.DataSet([{"color": "#FFFFFF", "from": "Dataset Distillation", "label": "enables training of", "title": "enables training of", "to": "Linear Probes"}, {"color": "#FFFFFF", "from": "Linear Gradient Matching", "label": "optimizes", "title": "optimizes", "to": "Synthetic Images"}, {"color": "#FFFFFF", "from": "Synthetic Data", "label": "outperforms", "title": "outperforms", "to": "Real-Image Baselines"}, {"color": "#FFFFFF", "from": "Synthetic Data", "label": "generalizes across", "title": "generalizes across", "to": "Pre-Trained Vision Models"}, {"color": "#FFFFFF", "from": "Distilled Datasets", "label": "improve", "title": "improve", "to": "Fine-Grained Classification"}, {"color": "#FFFFFF", "from": "EvoLMM", "label": "improves", "title": "improves", "to": "LMM reasoning capabilities"}, {"color": "#FFFFFF", "from": "EvoLMM", "label": "instantiates", "title": "instantiates", "to": "Proposer and Solver"}, {"color": "#FFFFFF", "from": "Proposer", "label": "generates", "title": "generates", "to": "image-grounded questions"}, {"color": "#FFFFFF", "from": "EvoLMM", "label": "learns through", "title": "learns through", "to": "continuous self-rewarding process"}, {"color": "#FFFFFF", "from": "EvoLMM", "label": "yields gains on", "title": "yields gains on", "to": "multimodal math-reasoning benchmarks"}, {"color": "#FFFFFF", "from": "TwiG", "label": "interleaves", "title": "interleaves", "to": "Textual Reasoning"}, {"color": "#FFFFFF", "from": "Textual Reasoning", "label": "guides", "title": "guides", "to": "Visual Generation"}, {"color": "#FFFFFF", "from": "TwiG", "label": "produces", "title": "produces", "to": "context-aware visual outputs"}, {"color": "#FFFFFF", "from": "SFT", "label": "uses", "title": "uses", "to": "TwiG-50K dataset"}, {"color": "#FFFFFF", "from": "RL", "label": "uses", "title": "uses", "to": "TwiG-GRPO strategy"}, {"color": "#FFFFFF", "from": "Existing VLMs", "label": "incur", "title": "incur", "to": "excessive computational costs"}, {"color": "#FFFFFF", "from": "DualMindVLM", "label": "uses", "title": "uses", "to": "a simple RL approach"}, {"color": "#FFFFFF", "from": "DualMindVLM", "label": "switches between", "title": "switches between", "to": "fast and slow thinking modes"}, {"color": "#FFFFFF", "from": "DualMindVLM", "label": "achieves", "title": "achieves", "to": "high token efficiency"}, {"color": "#FFFFFF", "from": "VNEP", "label": "extends", "title": "extends", "to": "NEP"}, {"color": "#FFFFFF", "from": "VANS", "label": "addresses", "title": "addresses", "to": "VNEP"}, {"color": "#FFFFFF", "from": "Joint-GRPO", "label": "orchestrates", "title": "orchestrates", "to": "VLM and VDM"}, {"color": "#FFFFFF", "from": "VANS-Data-100K", "label": "supports", "title": "supports", "to": "VNEP"}, {"color": "#FFFFFF", "from": "VANS", "label": "achieves", "title": "achieves", "to": "state-of-the-art performance"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"size": 16}}, "edges": {"color": {"inherit": true}, "smooth": false}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -50, "centralGravity": 0.01, "springLength": 100, "springConstant": 0.08}, "maxVelocity": 50, "solver": "forceAtlas2Based", "timestep": 0.35, "stabilization": {"enabled": true, "iterations": 1000}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

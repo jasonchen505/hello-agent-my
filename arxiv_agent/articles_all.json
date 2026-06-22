@@ -1,0 +1,76 @@
+[
+  {
+    "id": "http://arxiv.org/abs/2511.16674v1",
+    "title": "Dataset Distillation for Pre-Trained Self-Supervised Vision Models",
+    "summary": "The task of dataset distillation aims to find a small set of synthetic images such that training a model on them reproduces the performance of the same model trained on a much larger dataset of real samples. Existing distillation methods focus on synthesizing datasets that enable training randomly initialized models. In contrast, state-of-the-art vision approaches are increasingly building on large, pre-trained self-supervised models rather than training from scratch. In this paper, we investigate the problem of distilling datasets that enable us to optimally train linear probes on top of such large, pre-trained vision models. We introduce a method of dataset distillation for this task called Linear Gradient Matching that optimizes the synthetic images such that, when passed through a pre-trained feature extractor, they induce gradients in the linear classifier similar to those produced by the real data. Our method yields synthetic data that outperform all real-image baselines and, remarkably, generalize across pre-trained vision models, enabling us, for instance, to train a linear CLIP probe that performs competitively using a dataset distilled via a DINO backbone. Further, we show that our distilled datasets are exceptionally effective for fine-grained classification and provide a valuable tool for model interpretability, predicting, among other things, how similar two models' embedding spaces are under the platonic representation hypothesis or whether a model is sensitive to spurious correlations in adversarial datasets.",
+    "published": "2025-11-20",
+    "url": "https://arxiv.org/pdf/2511.16674v1",
+    "authors": [
+      "George Cazenavette",
+      "Antonio Torralba",
+      "Vincent Sitzmann"
+    ]
+  },
+  {
+    "id": "http://arxiv.org/abs/2511.16672v1",
+    "title": "EvoLMM: Self-Evolving Large Multimodal Models with Continuous Rewards",
+    "summary": "Recent advances in large multimodal models (LMMs) have enabled impressive reasoning and perception abilities, yet most existing training pipelines still depend on human-curated data or externally verified reward models, limiting their autonomy and scalability. In this work, we strive to improve LMM reasoning capabilities in a purely unsupervised fashion (without any annotated data or reward distillation). To this end, we propose a self-evolving framework, named EvoLMM, that instantiates two cooperative agents from a single backbone model: a Proposer, which generates diverse, image-grounded questions, and a Solver, which solves them through internal consistency, where learning proceeds through a continuous self-rewarding process. This dynamic feedback encourages both the generation of informative queries and the refinement of structured reasoning without relying on ground-truth or human judgments. When using the popular Qwen2.5-VL as the base model, our EvoLMM yields consistent gains upto $\\sim$3\\% on multimodal math-reasoning benchmarks, including ChartQA, MathVista, and MathVision, using only raw training images. We hope our simple yet effective approach will serve as a solid baseline easing future research in self-improving LMMs in a fully-unsupervised fashion. Our code and models are available at https://github.com/mbzuai-oryx/EvoLMM.",
+    "published": "2025-11-20",
+    "url": "https://arxiv.org/pdf/2511.16672v1",
+    "authors": [
+      "Omkat Thawakar",
+      "Shravan Venkatraman",
+      "Ritesh Thawkar",
+      "Abdelrahman Shaker",
+      "Hisham Cholakkal",
+      "Rao Muhammad Anwer",
+      "Salman Khan",
+      "Fahad Khan"
+    ]
+  },
+  {
+    "id": "http://arxiv.org/abs/2511.16671v1",
+    "title": "Thinking-while-Generating: Interleaving Textual Reasoning throughout Visual Generation",
+    "summary": "Recent advances in visual generation have increasingly explored the integration of reasoning capabilities. They incorporate textual reasoning, i.e., think, either before (as pre-planning) or after (as post-refinement) the generation process, yet they lack on-the-fly multimodal interaction during the generation itself. In this preliminary study, we introduce Thinking-while-Generating (TwiG), the first interleaved framework that enables co-evolving textual reasoning throughout the visual generation process. As visual content is progressively generating, textual reasoning is interleaved to both guide upcoming local regions and reflect on previously synthesized ones. This dynamic interplay produces more context-aware and semantically rich visual outputs. To unveil the potential of this framework, we investigate three candidate strategies, zero-shot prompting, supervised fine-tuning (SFT) on our curated TwiG-50K dataset, and reinforcement learning (RL) via a customized TwiG-GRPO strategy, each offering unique insights into the dynamics of interleaved reasoning. We hope this work inspires further research into interleaving textual reasoning for enhanced visual generation. Code will be released at: https://github.com/ZiyuGuo99/Thinking-while-Generating.",
+    "published": "2025-11-20",
+    "url": "https://arxiv.org/pdf/2511.16671v1",
+    "authors": [
+      "Ziyu Guo",
+      "Renrui Zhang",
+      "Hongyu Li",
+      "Manyuan Zhang",
+      "Xinyan Chen",
+      "Sifan Wang",
+      "Yan Feng",
+      "Peng Pei",
+      "Pheng-Ann Heng"
+    ]
+  },
+  {
+    "id": "http://arxiv.org/abs/2511.16670v1",
+    "title": "Learning to Think Fast and Slow for Visual Language Models",
+    "summary": "When confronted with complex problems, we tend to think slowly; conversely, for simple questions, we think quickly. Such a two-system thinking mechanism allows us to efficiently allocate cognitive resources, enabling quick decision-making for straightforward issues while reserving deeper analytical thinking for more intricate challenges. However, existing reasoning-oriented visual language models (VLMs), whether trained with explicit chain-of-thought annotations or rule-based RL rewards, mainly pursue lengthy, detailed reasoning chains, which often lead to excessive computational costs. In this work, we propose a simple RL approach, which enables VLMs to automatically switch between fast and slow thinking modes depending on task difficulty. The approach consists of two stages: in the first stage, we label data as either requiring fast thinking or slow thinking based on the model output length, which is inspired by the observation that pre-trained VLMs typically produce answers of varying lengths for different types of questions; in the second stage, we train the model using GRPO along with the thinking mode labels to develop dual-mode thinking. Despite its simplicity, our model, named DualMindVLM, significantly outperforms the base model and achieves performance on par with state-of-the-art visual reasoning models, while maintaining exceptionally high token efficiency.",
+    "published": "2025-11-20",
+    "url": "https://arxiv.org/pdf/2511.16670v1",
+    "authors": [
+      "Chenyu Lin",
+      "Cheng Chi",
+      "Jinlin Wu",
+      "Sharon Li",
+      "Kaiyang Zhou"
+    ]
+  },
+  {
+    "id": "http://arxiv.org/abs/2511.16669v1",
+    "title": "Video-as-Answer: Predict and Generate Next Video Event with Joint-GRPO",
+    "summary": "While language models have become impactful in many real-world applications, video generation remains largely confined to entertainment. Motivated by video's inherent capacity to demonstrate physical-world information that is difficult to convey through language alone (e.g., imagine teaching someone to tie a tie using only text), we identify an underutilized opportunity to extend video as a new answer modality for Next-Event Prediction (NEP), formalized as Video-Next-Event Prediction (VNEP). While the established NEP task takes a video with a procedural or predictive question as input to predict the next event in text, VNEP requires dynamic video responses. This shift from telling to showing unlocks more intuitive and customized answers for procedural learning and creative exploration. However, this task remains challenging for existing models, as it demands an understanding of multimodal input, instruction-conditioned reasoning, and the generation of video with visual and semantic consistency. To address this, we introduce VANS, a model that leverages reinforcement learning to align a Vision-Language Model (VLM) with a Video Diffusion Model (VDM) for VNEP. The core of VANS is our proposed Joint-GRPO that orchestrates the VLM and VDM to function as a unit. Driven by a shared reward on their respective output, it optimizes the VLM to produce captions that are both accurate and friendly to visualize, while guiding the VDM to generate videos that are faithful to these captions and the input visual context. To enable this learning, we craft VANS-Data-100K, a dedicated dataset for the VNEP task. Experiments on procedural and predictive benchmarks demonstrate that VANS achieves state-of-the-art performance in both video event prediction and visualization. Codes are released in https://github.com/KlingTeam/VANS.",
+    "published": "2025-11-20",
+    "url": "https://arxiv.org/pdf/2511.16669v1",
+    "authors": [
+      "Junhao Cheng",
+      "Liang Hou",
+      "Xin Tao",
+      "Jing Liao"
+    ]
+  }
+]
